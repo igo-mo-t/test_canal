@@ -45,6 +45,7 @@ def start_scheduler_1() -> None:
     Инициирует работу функции 'delete_and_update_data_in_db' каждые 10 секунд.
     """
     scheduler.init_app(app)
+    scheduler.start()
     scheduler.add_job(
         id="scheduled_task",
         func=delete_and_update_data_in_db,
@@ -58,19 +59,21 @@ def start_scheduler_2() -> None:
     """
     Инициирует работу функции 'add_new_data_in_db' каждые 10 секунд.
     """
+    scheduler.pause()
     scheduler.add_job(
         id="scheduled_task_2",
         func=add_new_data_in_db,
         trigger="interval",
-        seconds=10,
+        seconds=30,
         max_instances=2,
     )
-
+    scheduler.resume()
 
 def start_scheduler_3() -> None:
     """
     Инициирует работу функции 'update_the_price_relative_to_the_dollar' каждые 24 часа.
     """
+    scheduler.pause()
     scheduler.add_job(
         id="scheduled_task_3",
         func=update_the_price_relative_to_the_dollar,
@@ -78,11 +81,11 @@ def start_scheduler_3() -> None:
         hours=24,
         max_instances=2,
     )
-
+    scheduler.resume()
 
 if __name__ == "__main__":
     start_scheduler_1()
     start_scheduler_2()
     start_scheduler_3()
-    scheduler.start()
+    
     cli()
