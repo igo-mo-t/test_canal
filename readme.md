@@ -71,4 +71,14 @@
         _.dev/yml/md/txt - прочие файлы(Докер,зависимости и т.д)
 
 
+6. Нюансы
+
+    В какой-то момент планировщик расписаний APScheduler может выдать исключение, пока не нашел в чем проблема.
+    В таком случае нужно перезапустить приложение: 
+        опустить контейнеры командой: docker-compose down -v
+        и снова запустить командой: docker-compose up --build
+
+    Скрины работающего приложения прилагаю:
+
 ![Image alt](https://github.com/igo-mo-t/test_canal/raw/v1/image/im2.png)
+![Image alt](https://github.com/igo-mo-t/test_canal/raw/v1/image/im.png)
