@@ -69,3 +69,6 @@
         docker-entrypoint.sh - файл определяющий команды терминала для запуска приложения
 
         _.dev/yml/md/txt - прочие файлы(Докер,зависимости и т.д)
+
+
+![Image alt](https://github.com/igo-mo-t/test_canal/raw/v1/image/im2.png)
