@@ -8,4 +8,3 @@ class TableGoogleSheets(db.Model):
     price_dollar = db.Column(db.Float())
     price_ruble = db.Column(db.Float())
     delivery_time = db.Column(db.Date())
-
