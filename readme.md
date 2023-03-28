@@ -80,5 +80,5 @@
 
     Скрины работающего приложения прилагаю:
 
-![Image alt](https://github.com/igo-mo-t/test_canal/raw/v1/image/im2.png)
-![Image alt](https://github.com/igo-mo-t/test_canal/raw/v1/image/im.png)
+![Image alt](https://github.com/igo-mo-t/test_canal/raw/master/image/im2.png)
+![Image alt](https://github.com/igo-mo-t/test_canal/raw/master/image/im.png)
