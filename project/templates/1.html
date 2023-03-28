@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table from Google Sheet</title>
+    
+</head>
+<body>
+    <img src="static/img.png" width = "100%">
+    <hr>
+    <table border = "1">
+
+        <thead>
+            <tr>
+                <th>Total, $</th>
+                <th>Total, RUB</th>
+            </tr>
+            <tr>
+                <th>{{total_dollar}}</th>
+                <th>{{total_rub}}</th>
+            </tr>
+        </thead>
+    </table>
+    <hr>
+    <table border = "1">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>заказ №</th>
+                <th>стоимость,$</th>
+                <th>стоимость в руб.</th>
+                <th>срок поставки</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in table_data %}
+            <tr>
+                <td>{{ data[0]}}</td>
+                <td>{{ data[1]}}</td>
+                <td>{{ data[2]}}</td>
+                <td>{{ data[3]}}</td>
+                <td>{{ data[4]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
