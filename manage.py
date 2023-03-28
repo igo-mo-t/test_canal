@@ -1,40 +1,63 @@
 from flask.cli import FlaskGroup
 from project import app, db
 from flask_apscheduler import APScheduler
-from project.functions import delete_and_update_data_in_db, add_new_data_in_db
+from project.functions import delete_and_update_data_in_db, add_new_data_in_db,add_data_to_db
+from project.models import TableGoogleSheets
 
 cli = FlaskGroup(app)
 scheduler = APScheduler()
 
-@cli.command("create_db")
-def create_db():
+
+@cli.command("drop_db")
+def drop_db() -> None:
     """
-    Создает таблицы/БД
+    Удаляет таблицы БД.
+    """
+    db.drop_all()
+    db.session.commit()
+
+
+
+@cli.command("create_db")
+def create_db() -> None:
+    """
+    Создает таблицы БД.
     """
     db.create_all()
     db.session.commit()
-    
-    
-def start_scheduler_1():
+
+
+@cli.command("first_add_data_to_db")
+def first_add_data_to_db() -> None:
     """
-    Инициирует работу функции 'add_in_database' каждые 10 секунд.
+    Заполняет базу данных данными, полученными из Google таблицы,
+    при запуске приложения.
+    """
+    add_data_to_db()
+    
+
+def start_scheduler_1() -> None:
+    """
+    Инициирует работу функции 'delete_and_update_data_in_db' каждые 10 секунд.
     """
     scheduler.init_app(app)
     scheduler.start()
     scheduler.add_job(id='scheduled_task', 
                     func=delete_and_update_data_in_db, 
                     trigger='interval', 
-                    seconds=10)
+                    seconds=10,
+                    max_instances = 2)
         
-def start_scheduler_2():
+def start_scheduler_2() -> None:
     """
-    Инициирует работу функции 'add_in_database' каждые 10 секунд.
+    Инициирует работу функции 'add_new_data_in_db' каждые 10 секунд.
     """
     
     scheduler.add_job(id='scheduled_task_2', 
                     func=add_new_data_in_db, 
                     trigger='interval', 
-                    seconds=10)
+                    seconds=10,
+                    max_instances = 2)
 
 if __name__ == "__main__":
     start_scheduler_1()   
